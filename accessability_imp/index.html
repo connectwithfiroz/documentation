@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Widget by Firoz</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Accessibility Widget CSS -->
+    <link rel="stylesheet" href="accessability/css/accesibility-style.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col">
+                <h1>Welcome to the Accessibility Widget</h1>
+                <h2>Look at Bottom - RIGHT of you're screen. Try the option and give you're suggention. If you've any idea in your mind, you can show in this repository.</h2>
+                <p class="lead">
+                    This page showcases an accessibility widget developed . The widget includes several features designed to enhance accessibility for users:
+                </p>
+               
+                <p>
+                    To integrate this widget into any webpage, simply include the provided CSS and JS files from the <code>accessability</code> folder. The widget button will automatically render in the specified container with the configured options.
+                </p>
+
+               
+    
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Accessibility Widget Button Section -->
+    <div id="accessabilityBtnSection"></div>
+</body>
+    <!-- Bootstrap and jQuery Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Accessibility Widget Script -->
+    <!-- <script src="accessability/js/accessability.min.js"></script> -->
+    <script src="accessability/js/accessability.js"></script>
+    <script>
+        var isPageLoaded = isAllAjaxComplete = isAccessabilityRendered = false;
+        // $(document).ajaxStop(function(){
+        //     //WHEN ALL AJAX REQUEST COMPLETED
+        //     isAllAjaxComplete = true;
+        // });
+        isAllAjaxComplete = true;
+        document.addEventListener('DOMContentLoaded', function() {
+            //WHEN PAGE LOADED SUCCESSFULLY
+            isPageLoaded = true;
+        });
+    
+    
+        function renderAccessabilityWidget(params) {
+            let selected_lang = 'en';
+            WIDGET_SPEECH_LANGUAGE = selected_lang;//SET LANGUATE TO WIDGET GLOBAL VARIABLE
+        
+            const accessabilityBtnHtml = `<button class="btn btn-primary" type="button" title="Accessability Features">
+            Accessability</button>`;
+            const options = {
+                backgroundColor: '#FF9800', //BACKGROUND COLOR LIKE red, blue, #000(black)
+                accessabilityBtnContainer: 'accessabilityBtnSection', //ID OF CONTAINER WHERE YOU WANT TO RENDER START ACCESSIBILITY BUTTON
+                accessabilityBtn : accessabilityBtnHtml, //pass any html or text (If you'll pass anything then default btn will appear)
+                speechLanguage: selected_lang, //default(en-english), you can pass gu-gujarati, hi-hindi
+            }
+        
+            RenderAccessability(options); //DEFINED IN ACCESSABILITY.JS LIBRARRY
+        }
+    
+        function intervalFunction(){
+            if(isPageLoaded && isAllAjaxComplete ){
+                //  IF PAGE AND AJAX REQUEST COMPLETED
+                clearInterval(renderAccessInterval);//CLEAR INTERVVAL
+                renderAccessabilityWidget(); //RENDER ACCESSABILITY WIDGET
+                isAccessabilityRendered = true;//FLAG TO ADD DRAGGABLE FEATURE IN ACCESSABILITY WIDGET
+            }
+        }
+        let renderAccessInterval = setInterval(intervalFunction, 500);//execute function - intervalFunction every 0.5 sec
+    </script>
+</html>
