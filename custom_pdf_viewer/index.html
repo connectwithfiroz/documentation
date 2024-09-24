@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUSTOM PDF JS Library </title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <!-- PDF JS STYLE BOOTSTRAP AND PDF MIN JS MUST BE BEFORE THIS -->
+    <link rel="stylesheet" href="custom_pdf_js.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div id="main_pdf_container" style=" height:90vh; ">
+            <!-- Will be render by custom pdf js -->
+        </div>
+    </div>
+    
+</body>
+
+
+<script>
+    let pdfViewerObj = null;//Declare a globlar variable to accesas outside module
+</script>
+
+<script type="module">
+    //---------------- Usage Example ------------//
+    import PDFViewer from './custom_pdf_js.js'
+    function bookMark(e){
+        console.log(e);//It containt all requried information about selection and page number
+    }
+
+    let bookmarks  = {
+        "1": [
+            {
+                "left": "61.5px",
+                "top": "285px",
+                "width": "750px",
+                "height": "165px",
+                "backgroundColor": "",
+                "notes": "Bookmark",
+                "deleteAccess": false,
+                "bookmark_at": {
+                    "date_time": "19 June 2024 4:16 PM",
+                    "time": "16:16:37",
+                    "date": "19/06/2024"
+                }
+            },
+            {
+                "left": "53.5px",
+                "top": "835px",
+                "width": "810px",
+                "height": "151px",
+                "backgroundColor": "",
+                "notes": "Bookmark -2",
+                "deleteAccess": 1,
+                "bookmark_at": {
+                    "date_time": "19 June 2024 4:17 PM",
+                    "time": "16:17:18",
+                    "date": "19/06/2024"
+                }
+            }
+        ],
+        "2": [
+            {
+                "left": "69.5px",
+                "top": "838px",
+                "width": "737px",
+                "height": "180px",
+                "backgroundColor": "",
+                "notes": "How to print pdf?",
+                "deleteAccess": 1,
+                "bookmark_at": {
+                    "date_time": "19 June 2024 4:21 PM",
+                    "time": "16:21:28",
+                    "date": "19/06/2024"
+                }
+            }
+        ]
+        // get from database
+    }
+    
+    var pdfOption = {
+        // pdfUrl: 'pdf/test.pdf',//Path of your pdf
+        pdfUrl: 'pdf/test_pdf2.pdf',//Path of your pdf
+        containerId: 'main_pdf_container',//id without #
+        bookMarkCallback: bookMark ,//callback function when click on bookmark button
+        bookmarks,//all bookmarks
+    };
+    pdfViewerObj = new PDFViewer(pdfOption);//ASSIGN TO GLOBAL VARIABLE
+    //---------------- Usage Example ------------//
+</script>
+
+</html>
